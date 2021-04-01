@@ -14,10 +14,10 @@ pygame.display.set_caption("Nado Game")  #게임 이름
 clock = pygame.time.Clock()
 
 # 배경 이미지 불러오기
-background = pygame.image.load("C:\\Users\\lew1s\\PycharmProjects\\bubble\\bubble\\background.png")
+background = pygame.image.load("bubble/background.png")
 
 # 캐릭터(스프라이트) 불러오기
-character = pygame.image.load("C:\\Users\\lew1s\\PycharmProjects\\bubble\\bubble\\character.png")
+character = pygame.image.load("bubble/character.png")
 character_size = character.get_rect().size  #이미지의 크기를 구해 온다
 character_width = character_size[0] #캐릭터의 가로 크기
 character_height = character_size[1] #캐릭터의 세로 크기
@@ -31,10 +31,19 @@ to_y = 0
 # 이동 속도
 character_speed = 0.6
 
+# 적 enemy
+enemy = pygame.image.load("bubble/enemy.png")
+enemy_size = enemy.get_rect().size  #이미지의 크기를 구해 온다
+enemy_width = enemy_size[0] #캐릭터의 가로 크기
+enemy_height = enemy_size[1] #캐릭터의 세로 크기
+enemy_x_pos = (screen_width / 2) - (enemy_width / 2)  #화면 가로의 절반 크기에 해당하는 곳에 위치
+enemy_y_pos = (screen_height / 2) - (enemy_height / 2)     #화면 세로크기 가장 위에 해당하는 곳에 위치
+
+
 # 이벤트 루프
 running = True #게임이 진행중인가?
 while running:
-    dt = clock.tick(10)  # 게임 화면의 초당 프레임 수를 설정
+    dt = clock.tick(60)  # 게임 화면의 초당 프레임 수를 설정
 
     for event in pygame.event.get(): # 어떤 이벤트가 발생했는가?
         if event.type == pygame.QUIT: # x버튼을 눌러서 껐을 때
@@ -73,8 +82,8 @@ while running:
 
 
     screen.blit(background, (0, 0)) # 배경 그리기
-
     screen.blit(character, (character_x_pos, character_y_pos))
+    screen.blit(enemy, (enemy_x_pos, enemy_y_pos))
 
     pygame.display.update()  #게임 화면 다시 그리고. 반드시 계속 다시 호출 되어야 함.
 
